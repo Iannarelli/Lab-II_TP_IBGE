@@ -2,6 +2,7 @@
 Trabalho Prático - Laboratório de Computação II - Manipulação de Dados para Censo IBGE
 
 # Cadastro de usuário
+  IMPLEMENTAR MÉTODOS NA CLASS Usuario
 - ID                
 - IDADE
 - NOME
@@ -25,6 +26,7 @@ Trabalho Prático - Laboratório de Computação II - Manipulação de Dados par
 - Atualizar os dados do usuário
 
 # Relatório (Porcentagem e valor absoluto)
+  IMPLEMENTAR MÉTODOS NA CLASS GerarRelatorio
 - População total
 - Sexo (F / M)
 - Estado civil (solteiro / casado / divorciado / viúvo)
