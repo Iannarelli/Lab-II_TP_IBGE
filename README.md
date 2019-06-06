@@ -2,7 +2,7 @@
 Trabalho Prático - Laboratório de Computação II - Manipulação de Dados para Censo IBGE
 
 # Cadastro de usuário
-  IMPLEMENTAR MÉTODOS NA CLASS Usuario
+  IMPLEMENTAR MÉTODOS NA CLASS Pessoa
 - ID                
 - IDADE
 - NOME
