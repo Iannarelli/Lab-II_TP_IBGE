@@ -37,7 +37,7 @@ public class ArquivoTextoLeitura {
 		try {
 			textoEntrada = entrada.readLine();
 		}
-		catch (EOFException excecao) { //ExceÃ§Ã£o de final de arquivo.
+		catch (EOFException excecao) { //Exceção de final de arquivo.
 			return null;
 		}
 		catch (IOException excecao) {
