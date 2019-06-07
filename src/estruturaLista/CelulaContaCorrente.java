@@ -1,3 +1,5 @@
+package estruturaLista;
+
 public class CelulaContaCorrente {
 
 		ContaCorrente item;

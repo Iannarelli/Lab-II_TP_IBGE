@@ -1,3 +1,5 @@
+package estruturaLista;
+
 public class ListaContaCorrente {
 
 	private CelulaContaCorrente primeiro; // referência à primeira célula da lista encadeada de contas-correntes.

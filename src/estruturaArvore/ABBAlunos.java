@@ -1,3 +1,5 @@
+package estruturaArvore;
+
 public class ABBAlunos {
 
 	private NodoAluno raiz; // referência à raiz da árvore.

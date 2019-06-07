@@ -1,3 +1,5 @@
+package estruturaArvore;
+
 public class NodoAluno {
 
 	Aluno item;           // contém os dados do aluno armazenado no nodo da árvore.

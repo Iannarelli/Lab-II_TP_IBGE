@@ -1,3 +1,5 @@
+package aplicacao;
+
 import java.util.Scanner;
 
 public class SistemaIBGE {
@@ -53,7 +55,5 @@ public class SistemaIBGE {
 				break;
 			}
 		}while(op != 7);
-
 	}
-
 }

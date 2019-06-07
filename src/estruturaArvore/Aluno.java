@@ -1,3 +1,5 @@
+package estruturaArvore;
+
 public class Aluno {
 
 	private int numMatricula; // número de matrícula do aluno.
