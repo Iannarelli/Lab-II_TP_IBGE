@@ -1,8 +1,14 @@
 
 public class GerarRelatorio {
 	
-	public void populacaoToral(){
-		
+	
+	
+	public GerarRelatorio() {
+			
+	}
+	
+	public void populacaoTotal(ABBPessoa nova){
+		System.out.println(nova.getTotalRaiz(nova.raiz));
 	}
 	
 	public void taxaSexo(){
@@ -30,7 +36,7 @@ public class GerarRelatorio {
 		
 	}
 	
-	public void MediaIdesvioP() {
+	public void MediaDesvioP() {
 		
 	}
 }
