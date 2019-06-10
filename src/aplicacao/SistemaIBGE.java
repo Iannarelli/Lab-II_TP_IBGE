@@ -18,7 +18,7 @@ public class SistemaIBGE {
 		System.out.println("Para começar, informe o nome do arquivo da base de dados: ");
 		String arquivo = leitor.next();
 		leitorArquivo.abrirArquivo(arquivo);
-		manipulador.carregaDadosArquivo(leitorArquivo);
+		System.out.println("************ ATÉ AQUI ESTÁ FUNCIONANDO CORRETAMENTE ************");
 		do {
 			System.out.print("\t\t\tMENU DE OPÇÕES\n\n");
 			System.out.print("\t\t1- Pesquisar dado de uma pessoa\n\t\t2- Excluir dado de uma pessoa\n\t\t3- Alterar dados de uma pesoa\n");
