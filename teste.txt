@@ -1,5 +1,5 @@
 11092062774;LUISA S. J. LIMA;M;19;Rural;Divorciado;Branca
-12427;ALAN A. A. ALMEIDA;F;54;Urbana;Casado;Branca
+12427;ALAN A. A. ALMEIDA;F;54;Urbana;Casado;Parda
 2557241184;HENRIQUE S. B. FERREIRA;F;47;Urbana;Casado;Parda
 3179661911;FELIPE V. B. QUADROS;F;51;Urbana;Solteiro;Parda
 11264501470;WESLEY H. M. PAIVA;M;61;Urbana;Casado;Parda

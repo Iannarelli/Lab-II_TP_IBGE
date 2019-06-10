@@ -29,6 +29,8 @@ public final class EstruturaLista {
 		caracteristicas.add("31a45");
 		caracteristicas.add("46a65");
 		caracteristicas.add("+65");
+		for(int i=0;i<20;i++)
+			listas[i] = new Lista();
 	}
 
 	public Lista getLista(String opcao) {

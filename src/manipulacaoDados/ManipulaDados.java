@@ -9,18 +9,19 @@ public class ManipulaDados {
 	private EstruturaLista estruturaLista = new EstruturaLista();
 
 	public void carregaDadosArquivo(ArquivoTextoLeitura leitorArquivo) {
-		String linhaArquivo = "";
 		String[] informacoes = new String[7];
 		String[] categorias = new String[5];
 		Pessoa pessoa;
+		String linhaArquivo = leitorArquivo.ler();
 		while (linhaArquivo != null) {
-			linhaArquivo = leitorArquivo.ler();
 			informacoes = linhaArquivo.split(";");
 			pessoa = new Pessoa(Float.parseFloat(informacoes[0]), informacoes[1], informacoes[2].charAt(0),
 					Integer.parseInt(informacoes[3]), informacoes[4], informacoes[5], informacoes[6]);
 			defineCategorias(informacoes, categorias);
-			for(int i=2; i<=6; i++)
-				estruturaLista.getLista(categorias[i]).inserir(pessoa);
+			for(int i=0; i<5; i++) {
+				estruturaLista.getLista(categorias[i]).inserirFinal(pessoa);
+			}
+			linhaArquivo = leitorArquivo.ler();
 		}
 	}
 	

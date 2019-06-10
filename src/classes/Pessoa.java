@@ -9,6 +9,8 @@ public class Pessoa {
 	private String estadoCivil;
 	private String raca;
 
+	public Pessoa() {};
+
 	public Pessoa(float identidade, String nome, char sexo, int idade, String moradia, String estadoCivil, String raca) {
 		setIdentidade(identidade);
 		setNome(nome);
