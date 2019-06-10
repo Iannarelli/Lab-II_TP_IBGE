@@ -1,3 +1,5 @@
+package estruturaLista;
+
 public class ContaCorrente {
 
 	private String titular;        // nome do titular da conta-corrente
