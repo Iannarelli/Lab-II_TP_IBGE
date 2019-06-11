@@ -65,8 +65,8 @@ public class Indicador {
 		setBranca(manipulador.getEstruturaLista().getLista("branca").populacao());
 		setAmarela(manipulador.getEstruturaLista().getLista("amarela").populacao());
 		setIndigena(manipulador.getEstruturaLista().getLista("indigena").populacao());
-		setMediaF(populacaoF/populacaoTotal);
-		setMediaM(populacaoM/populacaoTotal);
+		setMediaF(totalIdadeF/populacaoF);   /*************AQUI***************/
+		setMediaM(totalIdadeM/populacaoM);   /*************AQUI***************/
 		setMediaRural(totalIdadeRural/rural);
 		setMediaUrbana(totalIdadeUrbana/urbana);
 		setMediaSolteiro(totalIdadeSolteiro/solteiro);

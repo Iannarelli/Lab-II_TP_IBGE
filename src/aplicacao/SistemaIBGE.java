@@ -12,7 +12,7 @@ public class SistemaIBGE {
 
 	public static void main(String[] args) {
 		int op = 0;
-		float identidade = 0;
+		long identidade = 0;
 		boolean mostraMenu = true;
 		String[] categorias = new String[5];
 		String[] dados = new String[7];
@@ -46,12 +46,12 @@ public class SistemaIBGE {
 				if (mostraMenu == true) {
 					System.out.print("\nInforme os dados abaixo:\nIdentidade: ");
 					do {
-						dados[0] = String.valueOf(leitor.nextFloat());
+						dados[0] = String.valueOf(leitor.nextLong());
 						lixo = leitor.nextLine();
-						if (Float.parseFloat(dados[0]) <= 0)
+						if (Long.parseLong(dados[0]) <= 0)
 							System.out.print(
 									"\tInformação inválida. Informe novamente a identidade (número maior que zero): ");
-					} while (Float.parseFloat(dados[0]) <= 0);
+					} while (Long.parseLong(dados[0]) <= 0);
 				} else {
 					System.out.print("\nInforme os dados abaixo (para sair, escreva \"sair\"):\nIdentidade: ");
 					do {
@@ -60,17 +60,17 @@ public class SistemaIBGE {
 							mostraMenu = true;
 							break;
 						} else {
-							if (Float.parseFloat(dados[0]) > 0)
+							if (Long.parseLong(dados[0]) > 0)
 								dados[0] = String.valueOf(dados[0]);
 							else
 								System.out.print(
 										"\tInformação inválida. Informe novamente a identidade (número maior que zero): ");
 						}
-					} while (!dados[0].equalsIgnoreCase("sair") && Float.parseFloat(dados[0]) <= 0);
+					} while (!dados[0].equalsIgnoreCase("sair") && Long.parseLong(dados[0]) <= 0);
 				}
 
 				if (!dados[0].equalsIgnoreCase("sair")) {
-					if (manipulador.getArvore().pesquisar(Float.parseFloat(dados[0])) == null) {
+					if (manipulador.getArvore().pesquisar(Long.parseLong(dados[0])) == null) {
 
 						System.out.print("Nome completo: ");
 						dados[1] = leitor.nextLine();
@@ -107,16 +107,16 @@ public class SistemaIBGE {
 									&& !dados[5].equalsIgnoreCase("casado") && !dados[5].equalsIgnoreCase("casada")
 									&& !dados[5].equalsIgnoreCase("divorciado")
 									&& !dados[5].equalsIgnoreCase("divorciada") && !dados[5].equalsIgnoreCase("viuvo")
-									&& !dados[5].equalsIgnoreCase("viuvo") && !dados[5].equalsIgnoreCase("viúvo")
-									&& !dados[5].equalsIgnoreCase("viúvo"))
+									&& !dados[5].equalsIgnoreCase("viuva") && !dados[5].equalsIgnoreCase("viúvo")
+									&& !dados[5].equalsIgnoreCase("viúva"))
 								System.out.print(
 										"\tInformação inválida. Informe novamente o estado civil (solteiro / casado / divorciado /"
 												+ " viúvo): ");
 						} while (!dados[5].equalsIgnoreCase("solteiro") && !dados[5].equalsIgnoreCase("solteira")
 								&& !dados[5].equalsIgnoreCase("casado") && !dados[5].equalsIgnoreCase("casada")
 								&& !dados[5].equalsIgnoreCase("divorciado") && !dados[5].equalsIgnoreCase("divorciada")
-								&& !dados[5].equalsIgnoreCase("viuvo") && !dados[5].equalsIgnoreCase("viuvo")
-								&& !dados[5].equalsIgnoreCase("viúvo") && !dados[5].equalsIgnoreCase("viúvo"));
+								&& !dados[5].equalsIgnoreCase("viuvo") && !dados[5].equalsIgnoreCase("viuva") /*************AQUI***************/
+								&& !dados[5].equalsIgnoreCase("viúvo") && !dados[5].equalsIgnoreCase("viúva"));/*************AQUI***************/
 
 						System.out.print("Raça (parda / preta / branca / amarela / indígena): ");
 						do {
@@ -137,8 +137,10 @@ public class SistemaIBGE {
 								&& !dados[6].equalsIgnoreCase("indigena") && !dados[6].equalsIgnoreCase("indigeno")
 								&& !dados[6].equalsIgnoreCase("indígena") && !dados[6].equalsIgnoreCase("indígeno"));
 						manipulador.pessoaNova(dados);
-					} else
+					} else {
+						System.out.println("A identidade " + identidade + " já está dadastrada."); /*************AQUI***************/
 						mostraMenu = true;
+					}
 				}
 				break;
 			case 2:
@@ -151,7 +153,7 @@ public class SistemaIBGE {
 				else
 					op = 4;
 				do {
-					identidade = leitor.nextFloat();
+					identidade = leitor.nextLong();
 					lixo = leitor.nextLine();
 					if (identidade <= 0) {
 						System.out.print(
@@ -233,21 +235,20 @@ public class SistemaIBGE {
 						case 5:
 							System.out.print("Estado civil (solteiro / casado / divorciado / viúvo): ");
 							do {
-								dados[5] = leitor.nextLine();
+								System.out.println(dados[5]);
 								if (!dados[5].equalsIgnoreCase("solteiro") && !dados[5].equalsIgnoreCase("solteira")
 										&& !dados[5].equalsIgnoreCase("casado") && !dados[5].equalsIgnoreCase("casada")
-										&& !dados[5].equalsIgnoreCase("divorciado")
-										&& !dados[5].equalsIgnoreCase("divorciada") && !dados[5].equalsIgnoreCase("viuvo")
-										&& !dados[5].equalsIgnoreCase("viuvo") && !dados[5].equalsIgnoreCase("viúvo")
-										&& !dados[5].equalsIgnoreCase("viúvo"))
+										&& !dados[5].equalsIgnoreCase("divorciado")	&& !dados[5].equalsIgnoreCase("divorciada")
+										&& !dados[5].equalsIgnoreCase("viuvo") && !dados[5].equalsIgnoreCase("viuva")
+										&& !dados[5].equalsIgnoreCase("viúvo") && !dados[5].equalsIgnoreCase("viúva"))
 									System.out.print(
 											"\tInformação inválida. Informe novamente o estado civil (solteiro / casado / divorciado /"
 													+ " viúvo): ");
 							} while (!dados[5].equalsIgnoreCase("solteiro") && !dados[5].equalsIgnoreCase("solteira")
 									&& !dados[5].equalsIgnoreCase("casado") && !dados[5].equalsIgnoreCase("casada")
 									&& !dados[5].equalsIgnoreCase("divorciado") && !dados[5].equalsIgnoreCase("divorciada")
-									&& !dados[5].equalsIgnoreCase("viuvo") && !dados[5].equalsIgnoreCase("viuvo")
-									&& !dados[5].equalsIgnoreCase("viúvo") && !dados[5].equalsIgnoreCase("viúvo"));
+									&& !dados[5].equalsIgnoreCase("viuvo") && !dados[5].equalsIgnoreCase("viuva") /*************AQUI***************/
+									&& !dados[5].equalsIgnoreCase("viúvo") && !dados[5].equalsIgnoreCase("viúva"));/*************AQUI***************/
 							if (manipulador.getArvore().pesquisar(identidade) != null) {
 								manipulador.getArvore().pesquisar(identidade).setEstadoCivil(dados[5]);
 								manipulador.armazenaDadosArquivo();
@@ -289,7 +290,7 @@ public class SistemaIBGE {
 			case 5:
 				System.out.print("Para excluir um registro, digite a identidade da pessoa: ");
 				do {
-					identidade = leitor.nextFloat();
+					identidade = leitor.nextLong();
 					lixo = leitor.nextLine();
 					if (identidade <= 0)
 						System.out.print("\tInformação inválida. Informe novamente a identidade (número maior que zero): ");
