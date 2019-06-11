@@ -96,4 +96,12 @@ public class ManipulaDados {
 				informacoes[6].equalsIgnoreCase("indigeno") || informacoes[6].equalsIgnoreCase("indígeno"))
 			categorias[4] = "indigena";
 	}
+	
+	public void pessoaNova(String[] dados) {
+		Pessoa pessoaNova = new Pessoa(Float.parseFloat(dados[0]), dados[1], dados[2].charAt(0), Integer.parseInt(dados[3]), dados[4],
+				dados[5], dados[6]);
+		populaListas(dados, pessoaNova);
+		populaArvore(pessoaNova);
+		System.out.println(pessoaNova.toString()); //verificar se precisa ou se colocou só para teste
+	}
 }
