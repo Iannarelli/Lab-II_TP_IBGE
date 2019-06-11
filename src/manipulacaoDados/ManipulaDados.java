@@ -9,6 +9,7 @@ public class ManipulaDados {
 
 	private EstruturaLista estruturaLista = new EstruturaLista();
 	private Arvore arvore = new Arvore();
+	private Pessoa pessoa = new Pessoa();
 
 	public EstruturaLista getEstruturaLista() {
 		return estruturaLista;
@@ -25,7 +26,14 @@ public class ManipulaDados {
 	public void setArvore(Arvore arvore) {
 		this.arvore = arvore;
 	}
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
 
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+	
 	public void carregaDadosArquivo(ArquivoTextoLeitura leitorArquivo) {
 		String[] informacoes = new String[7];
 		Pessoa pessoa;
@@ -96,4 +104,6 @@ public class ManipulaDados {
 				informacoes[6].equalsIgnoreCase("indigeno") || informacoes[6].equalsIgnoreCase("indígeno"))
 			categorias[4] = "indigena";
 	}
+
+
 }

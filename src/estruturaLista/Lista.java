@@ -1,18 +1,28 @@
 package estruturaLista;
 
 import classes.Pessoa;
+import manipulacaoDados.ManipulaDados;
 
 public class Lista { 
 	 
 	private CelulaPessoa primeiro; 
-	private CelulaPessoa ultimo; 
+	private CelulaPessoa ultimo;
+	private float populacao = 0;
  
 	public Lista() { 
 		primeiro = new CelulaPessoa(); 
  
 		ultimo = primeiro; 
-	} 
- 
+	}
+
+	public float getPopulacao( ) {
+		return populacao;
+	}
+
+	public void setPopulacao(float populacao) {
+		this.populacao = populacao;
+	}
+
 	public void inserirFinal(Pessoa pessoa) { 
 		CelulaPessoa aux = new CelulaPessoa(); 
 
@@ -60,7 +70,7 @@ return null;
 			return false; 
 		} 
 	} 
- 
+
 	public void imprimir() { 
 		 
 		 

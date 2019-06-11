@@ -2,6 +2,7 @@ package aplicacao;
 
 import java.util.Scanner;
 
+import classes.GerarRelatorio;
 import classes.Pessoa;
 import estruturaLista.EstruturaLista;
 import manipulacaoArquivo.ArquivoTextoLeitura;
@@ -14,7 +15,7 @@ public class SistemaIBGE {
 		ManipulaDados manipulador = new ManipulaDados();
 		Scanner leitor = new Scanner(System.in);
 		int op, ID=0;
-		System.out.println("Bem vindo ao Sistema CENSO 2020 do IBGE!\n");
+		System.out.println("Bem vindo ao Sistema CENSO 2020 do IBGE!\n");	
 		System.out.println("Para começar, informe o nome do arquivo da base de dados: ");
 		String arquivo = leitor.next();
 		leitorArquivo.abrirArquivo(arquivo);
@@ -70,13 +71,18 @@ public class SistemaIBGE {
 	}
 
 	private static void RelatorioEstatistico() {
-		// TODO Auto-generated method stub
-		
-	}
+		System.out.println("\n\t\tPoulacional Total: " + );
+		System.out.println("\n\t\t------------ Caracterização ------------\n\t##### Sexo #####\nFeminino: " +   + "\nMasculino: " + );
+		System.out.println("\n\t#### Estado Civil ####\nSolteiro(a): " + + "\nCasado(a): " + + "Divorciado(a): " + + "Viúvo(a): " + );
+		System.out.println("\n\t#### Moradia ####\nRural: " + + "\nUrbano: " + );
+		System.out.println("\n.... Demais categorias ....\n");
+		}
 
 	private static void RelatorioGeral(int iD) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Média de idade geral: " + );
+		System.out.println("\n\t#### Categoraizada por sexo ####\nFeminino: " + + "Masculino: " + );
+		System.out.println("\n\t#### Categoraizada por moradia ####\nRural: " + + "Urbano: " + );
+		System.out.println("\n\t#### Solteiros e Casados ####\n\t\tMédia de idade\tDesvio Padrão\nSolteiros: " + + "\t" + + "\nCasados: " + + "\t" + );
 	}
 
 	private static void AdicionarPessoa(int iD) {
