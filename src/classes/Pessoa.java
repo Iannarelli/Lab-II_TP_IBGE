@@ -1,7 +1,7 @@
 package classes;
 
 public class Pessoa {
-	private float identidade;
+	private long identidade;
 	private String nome;
 	private char sexo;
 	private int idade;
@@ -11,7 +11,7 @@ public class Pessoa {
 
 	public Pessoa() {};
 
-	public Pessoa(float identidade, String nome, char sexo, int idade, String moradia, String estadoCivil, String raca) {
+	public Pessoa(long identidade, String nome, char sexo, int idade, String moradia, String estadoCivil, String raca) {
 		setIdentidade(identidade);
 		setNome(nome);
 		setSexo(sexo);
@@ -21,11 +21,11 @@ public class Pessoa {
 		setRaca(raca);
 	}
 
-	public float getIdentidade() {
+	public long getIdentidade() {
 		return identidade;
 	}
 
-	public void setIdentidade(float identidade) {
+	public void setIdentidade(long identidade) {
 		this.identidade = identidade;
 	}
 

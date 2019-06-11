@@ -1,15 +1,25 @@
 package manipulacaoDados;
 
+import classes.Indicador;
 import classes.Pessoa;
 import estruturaArvore.Arvore;
 import estruturaLista.EstruturaLista;
+import manipulacaoArquivo.ArquivoTextoEscrita;
 import manipulacaoArquivo.ArquivoTextoLeitura;
 
 public class ManipulaDados {
 
 	private EstruturaLista estruturaLista = new EstruturaLista();
 	private Arvore arvore = new Arvore();
-	private Pessoa pessoa = new Pessoa();
+	private ArquivoTextoLeitura leitorArquivo;
+	private ArquivoTextoEscrita escritorArquivo;
+	private String arquivo;
+
+	public ManipulaDados(ArquivoTextoLeitura leitorArquivo, ArquivoTextoEscrita escritorArquivo, String arquivo) {
+		setLeitorArquivo(leitorArquivo);
+		setEscritorArquivo(escritorArquivo);
+		setArquivo(arquivo);
+	}
 
 	public EstruturaLista getEstruturaLista() {
 		return estruturaLista;
@@ -30,22 +40,50 @@ public class ManipulaDados {
 		return pessoa;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public ArquivoTextoLeitura getLeitorArquivo() {
+		return leitorArquivo;
 	}
-	
-	public void carregaDadosArquivo(ArquivoTextoLeitura leitorArquivo) {
+
+	public void setLeitorArquivo(ArquivoTextoLeitura leitorArquivo) {
+		this.leitorArquivo = leitorArquivo;
+	}
+
+	public ArquivoTextoEscrita getEscritorArquivo() {
+		return escritorArquivo;
+	}
+
+	public void setEscritorArquivo(ArquivoTextoEscrita escritorArquivo) {
+		this.escritorArquivo = escritorArquivo;
+	}
+
+	public String getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(String arquivo) {
+		this.arquivo = arquivo;
+	}
+
+	public void carregaDadosArquivo() {
 		String[] informacoes = new String[7];
 		Pessoa pessoa;
 		String linhaArquivo = leitorArquivo.ler();
 		while (linhaArquivo != null) {
 			informacoes = linhaArquivo.split(";");
-			pessoa = new Pessoa(Float.parseFloat(informacoes[0]), informacoes[1], informacoes[2].charAt(0),
+			pessoa = new Pessoa(Long.parseLong(informacoes[0]), informacoes[1], informacoes[2].charAt(0),
 					Integer.parseInt(informacoes[3]), informacoes[4], informacoes[5], informacoes[6]);
 			populaListas(informacoes, pessoa);
 			populaArvore(pessoa);
 			linhaArquivo = leitorArquivo.ler();
 		}
+	}
+	
+	public void armazenaDadosArquivo() {
+		StringBuilder aux = new StringBuilder(estruturaLista.getLista("masculino").listaCompleta());
+		aux.append(estruturaLista.getLista("feminino").listaCompleta());
+		escritorArquivo.abrirArquivo(arquivo);
+		escritorArquivo.escrever(aux.toString());
+		escritorArquivo.fecharArquivo();
 	}
 	
 	private void populaArvore(Pessoa pessoa) {
@@ -54,13 +92,14 @@ public class ManipulaDados {
 	
 	private void populaListas(String[] informacoes, Pessoa pessoa) {
 		String[] categorias = new String[5];
-		defineCategorias(informacoes, categorias);
+		categorias = defineCategorias(informacoes);
 		for(int i=0; i<5; i++) {
 			estruturaLista.getLista(categorias[i]).inserirFinal(pessoa);
 		}		
 	}
 
-	private void defineCategorias(String[] informacoes, String[] categorias) {
+	public String[] defineCategorias(String[] informacoes) {
+		String[] categorias = new String[5];
 		if (informacoes[2].charAt(0) == 'm' || informacoes[2].charAt(0) == 'M')
 			categorias[0] = "masculino";
 		else if (informacoes[2].charAt(0) == 'f' || informacoes[2].charAt(0) == 'F')
@@ -89,8 +128,8 @@ public class ManipulaDados {
 			categorias[3] = "casado";
 		else if (informacoes[5].equalsIgnoreCase("divorciada") || informacoes[5].equalsIgnoreCase("divorciado"))
 			categorias[3] = "divorciado";
-		else if (informacoes[5].equalsIgnoreCase("viuva") || informacoes[5].equalsIgnoreCase("viúva") ||
-				informacoes[5].equalsIgnoreCase("viuvo") || informacoes[5].equalsIgnoreCase("viúvo"))
+		else if (informacoes[5].equalsIgnoreCase("viuva") || informacoes[5].equalsIgnoreCase("viï¿½va") ||
+				informacoes[5].equalsIgnoreCase("viuvo") || informacoes[5].equalsIgnoreCase("viï¿½vo"))
 			categorias[3] = "viuvo";
 		if (informacoes[6].equalsIgnoreCase("parda") || informacoes[6].equalsIgnoreCase("pardo"))
 			categorias[4] = "parda";
@@ -100,10 +139,26 @@ public class ManipulaDados {
 			categorias[4] = "branca";
 		else if (informacoes[6].equalsIgnoreCase("amarela") || informacoes[6].equalsIgnoreCase("amarelo"))
 			categorias[4] = "amarela";
-		else if (informacoes[6].equalsIgnoreCase("indigena") || informacoes[6].equalsIgnoreCase("indígena") ||
-				informacoes[6].equalsIgnoreCase("indigeno") || informacoes[6].equalsIgnoreCase("indígeno"))
+		else if (informacoes[6].equalsIgnoreCase("indigena") || informacoes[6].equalsIgnoreCase("indï¿½gena") ||
+				informacoes[6].equalsIgnoreCase("indigeno") || informacoes[6].equalsIgnoreCase("indï¿½geno"))
 			categorias[4] = "indigena";
+		return categorias;
 	}
-
-
+	
+	public void pessoaNova(String[] dados) {
+		Pessoa pessoaNova = new Pessoa(Long.parseLong(dados[0]), dados[1], dados[2].charAt(0), Integer.parseInt(dados[3]), dados[4],
+				dados[5], dados[6]);
+		populaListas(dados, pessoaNova);
+		populaArvore(pessoaNova);
+		armazenaDadosArquivo();
+		System.out.println(pessoaNova.toString()); //verificar se precisa ou se colocou sï¿½ para teste
+	}
+	
+	public float populacaoTotal() {
+		return estruturaLista.getLista("masculino").populacao()[0] + estruturaLista.getLista("feminino").populacao()[0];
+	}
+	
+	public Indicador geraIndicadores() {
+		return new Indicador(this);
+	}
 }

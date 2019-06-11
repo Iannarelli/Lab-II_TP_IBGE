@@ -73,13 +73,15 @@ public class Arvore {
     
     private Pessoa localizarNaArvore(NodoPessoa raizArvore, float identidade) {
     	if(!arvoreVazia()) {
-    		if(raizArvore.item.getIdentidade() == identidade)
-    			return raizArvore.item;
-    		else if(raizArvore.item.getIdentidade() > identidade)
-    			return localizarNaArvore(raizArvore.esquerda, identidade);
-    		else if(raizArvore.item.getIdentidade() < identidade)
-    			return localizarNaArvore(raizArvore.direita, identidade);
-    	}
+			if (raizArvore != null) {
+				if (raizArvore.item.getIdentidade() == identidade)
+					return raizArvore.item;
+				else if (raizArvore.item.getIdentidade() > identidade)
+					return localizarNaArvore(raizArvore.esquerda, identidade);
+				else if (raizArvore.item.getIdentidade() < identidade)
+					return localizarNaArvore(raizArvore.direita, identidade);
+			}
+		}
     	return null;
     }
 
