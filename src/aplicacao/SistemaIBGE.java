@@ -2,25 +2,31 @@ package aplicacao;
 
 import java.util.Scanner;
 
+import classes.Pessoa;
+import manipulacaoArquivo.ArquivoTextoEscrita;
 import manipulacaoArquivo.ArquivoTextoLeitura;
 import manipulacaoDados.ManipulaDados;
 
 public class SistemaIBGE {
 
 	public static void main(String[] args) {
-		ArquivoTextoLeitura leitorArquivo = new ArquivoTextoLeitura();
-		ManipulaDados manipulador = new ManipulaDados();
-		Scanner leitor = new Scanner(System.in);
 		int op = 0;
 		float identidade = 0;
-		String dados[] = new String[7];
+		boolean mostraMenu = true;
+		String[] categorias = new String[5];
+		String[] dados = new String[7];
 		String lixo;
+		Pessoa pessoa;
+		Scanner leitor = new Scanner(System.in);
+		ArquivoTextoLeitura leitorArquivo = new ArquivoTextoLeitura();
+		ArquivoTextoEscrita escritorArquivo = new ArquivoTextoEscrita();
 		System.out.println("Bem vindo ao Sistema CENSO 2020 do IBGE!\n");
 		System.out.println("Para começar, informe o nome do arquivo da base de dados: ");
 		String arquivo = leitor.next();
+		ManipulaDados manipulador = new ManipulaDados(leitorArquivo, escritorArquivo, arquivo);
 		leitorArquivo.abrirArquivo(arquivo);
-		manipulador.carregaDadosArquivo(leitorArquivo);
-		boolean mostraMenu = true;
+		manipulador.carregaDadosArquivo();
+		leitorArquivo.fecharArquivo();
 		System.out.println("********** PAROU NO SWITCH CASE 4 FUNCIONANDO. AGORA É FAZER CASE 5 EM DIANTE **********");
 		do {
 			if (mostraMenu == true) {
@@ -50,7 +56,6 @@ public class SistemaIBGE {
 					System.out.print("\nInforme os dados abaixo (para sair, escreva \"sair\"):\nIdentidade: ");
 					do {
 						dados[0] = leitor.nextLine();
-						System.out.println(dados[0]);
 						if (dados[0].equalsIgnoreCase("sair")) {
 							mostraMenu = true;
 							break;
@@ -180,8 +185,10 @@ public class SistemaIBGE {
 						case 1:
 							System.out.print("Informe o nome para atualização: ");
 							dados[1] = leitor.nextLine();
-							if (manipulador.getArvore().pesquisar(identidade) != null)
+							if (manipulador.getArvore().pesquisar(identidade) != null) {
 								manipulador.getArvore().pesquisar(identidade).setNome(dados[1]);
+								manipulador.armazenaDadosArquivo();
+							}
 							break;
 						case 2:
 							System.out.print("Informe o sexo para atualização ( m / f ): ");
@@ -192,8 +199,10 @@ public class SistemaIBGE {
 									System.out.print("\tInformação inválida. Informe novamente o sexo ( m / f ): ");
 							} while (!dados[2].equalsIgnoreCase("m") && !dados[2].equalsIgnoreCase("M")
 									&& !dados[2].equalsIgnoreCase("f") && !dados[2].equalsIgnoreCase("F"));
-							if (manipulador.getArvore().pesquisar(identidade) != null)
+							if (manipulador.getArvore().pesquisar(identidade) != null) {
 								manipulador.getArvore().pesquisar(identidade).setSexo(dados[2].charAt(0));
+								manipulador.armazenaDadosArquivo();
+							}
 							break;
 						case 3:
 							System.out.print("Informe a idade para atualização: ");
@@ -203,8 +212,10 @@ public class SistemaIBGE {
 								if (Integer.parseInt(dados[3]) < 0)
 									System.out.print("\tInformação inválida. Informe novamente a idade (valor não nulo): ");
 							} while (Integer.parseInt(dados[3]) < 0);
-							if (manipulador.getArvore().pesquisar(identidade) != null)
+							if (manipulador.getArvore().pesquisar(identidade) != null) {
 								manipulador.getArvore().pesquisar(identidade).setIdade(Integer.parseInt(dados[3]));
+								manipulador.armazenaDadosArquivo();
+							}
 							break;
 						case 4:
 							System.out.print("Tipo de moradia (rural / urbana): ");
@@ -214,8 +225,10 @@ public class SistemaIBGE {
 									System.out.print(
 											"\tInformação inválida. Informe novamente o tipo de moradia (rural / urbana): ");
 							} while (!dados[4].equalsIgnoreCase("rural") && !dados[4].equalsIgnoreCase("urbana"));
-							if (manipulador.getArvore().pesquisar(identidade) != null)
+							if (manipulador.getArvore().pesquisar(identidade) != null) {
 								manipulador.getArvore().pesquisar(identidade).setMoradia(dados[4]);
+								manipulador.armazenaDadosArquivo();
+							}
 							break;
 						case 5:
 							System.out.print("Estado civil (solteiro / casado / divorciado / viúvo): ");
@@ -235,8 +248,10 @@ public class SistemaIBGE {
 									&& !dados[5].equalsIgnoreCase("divorciado") && !dados[5].equalsIgnoreCase("divorciada")
 									&& !dados[5].equalsIgnoreCase("viuvo") && !dados[5].equalsIgnoreCase("viuvo")
 									&& !dados[5].equalsIgnoreCase("viúvo") && !dados[5].equalsIgnoreCase("viúvo"));
-							if (manipulador.getArvore().pesquisar(identidade) != null)
+							if (manipulador.getArvore().pesquisar(identidade) != null) {
 								manipulador.getArvore().pesquisar(identidade).setEstadoCivil(dados[5]);
+								manipulador.armazenaDadosArquivo();
+							}
 							break;
 						case 6:
 							System.out.print("Raça (parda / preta / branca / amarela / indígena): ");
@@ -257,26 +272,47 @@ public class SistemaIBGE {
 									&& !dados[6].equalsIgnoreCase("amarela") && !dados[6].equalsIgnoreCase("amarelo")
 									&& !dados[6].equalsIgnoreCase("indigena") && !dados[6].equalsIgnoreCase("indigeno")
 									&& !dados[6].equalsIgnoreCase("indígena") && !dados[6].equalsIgnoreCase("indígeno"));
-							if (manipulador.getArvore().pesquisar(identidade) != null)
+							if (manipulador.getArvore().pesquisar(identidade) != null) {
 								manipulador.getArvore().pesquisar(identidade).setRaca(dados[6]);
+								manipulador.armazenaDadosArquivo();
+							}
 							break;
 						case 7:
-							System.out.println("case 8");
 							mostraMenu = true;
 							break;
 						default:
 							break;
 						}
-						System.out.println("opcao atualizar: " + opAtualizar);
 					} while (opAtualizar != 7);
 				}
 				break;
-			case 5:          //o conteúdo dos CASES não necessariamente representam o que devem fazer
-				System.out.print("Para a exlusão, digite o ID da pessoa a ser procurada: ");
-//					ID = leitor.nextInt();
-//					RemoverPessoa(ID);
+			case 5:
+				System.out.print("Para excluir um registro, digite a identidade da pessoa: ");
+				do {
+					identidade = leitor.nextFloat();
+					lixo = leitor.nextLine();
+					if (identidade <= 0)
+						System.out.print("\tInformação inválida. Informe novamente a identidade (número maior que zero): ");
+				} while (identidade <= 0);
+				pessoa = manipulador.getArvore().pesquisar(identidade);
+				if(pessoa == null) {
+					System.out.println("A identidade " + identidade + " não consta nos registros.");
+				} else {
+					manipulador.getArvore().remover(identidade);
+					dados[0] = String.valueOf(pessoa.getIdentidade());
+					dados[1] = pessoa.getNome();
+					dados[2] = String.valueOf(pessoa.getSexo());
+					dados[3] = String.valueOf(pessoa.getIdade());
+					dados[4] = pessoa.getMoradia();
+					dados[5] = pessoa.getEstadoCivil();
+					dados[6] = pessoa.getRaca();
+					categorias = manipulador.defineCategorias(dados);
+					for (int i = 0; i < 5; i++)
+						manipulador.getEstruturaLista().getLista(categorias[i]).retirar(pessoa.getIdentidade());
+					manipulador.armazenaDadosArquivo();
+				}
 				break;
-			case 6:
+			case 6:           //o conteúdo dos CASES não necessariamente representam o que devem fazer
 				System.out.print("Alteração de dados, digite o ID da pessoa: ");
 //					ID = leitor.nextInt();
 //					AlterarPessoa(ID);
