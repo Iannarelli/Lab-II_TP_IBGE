@@ -2,6 +2,7 @@ package aplicacao;
 
 import java.util.Scanner;
 
+import classes.Indicador;
 import classes.Pessoa;
 import manipulacaoArquivo.ArquivoTextoEscrita;
 import manipulacaoArquivo.ArquivoTextoLeitura;
@@ -27,19 +28,18 @@ public class SistemaIBGE {
 		leitorArquivo.abrirArquivo(arquivo);
 		manipulador.carregaDadosArquivo();
 		leitorArquivo.fecharArquivo();
-		System.out.println("********** PAROU NO SWITCH CASE 4 FUNCIONANDO. AGORA É FAZER CASE 5 EM DIANTE **********");
 		do {
 			if (mostraMenu == true) {
 				System.out.print("\n\t\t\tMENU DE OPÇÕES\n\n");
 				System.out.print("\t\t1- Inserir dados de uma pessoa\n\t\t2- Inserir dados de diversas pessoas\n\t\t"
 						+ "3- Pesquisar dados de uma pessoa\n\t\t4- Alterar dados de uma pesoa\n\t\t5- Excluir dados de uma pessoa\n\t\t"
-						+ "6- Consultar relatórios\n\nInforme a opção desejada: ");
+						+ "6- Relatório de categorização\n\t\t7- Relatório estatístico\n\t\t8- Sair\n\nInforme a opção desejada: ");
 				do {
 					op = leitor.nextInt();
 					lixo = leitor.nextLine();
-					if (op < 1 || op > 5)
+					if (op < 1 || op > 8)
 						System.out.print("Opção inválida. Informe novamente uma das opção entre 1 e 5: ");
-				} while (op < 1 || op > 5);
+				} while (op < 1 || op > 8);
 			}
 			switch (op) {
 			case 1:
@@ -312,56 +312,92 @@ public class SistemaIBGE {
 					manipulador.armazenaDadosArquivo();
 				}
 				break;
-			case 6:           //o conteúdo dos CASES não necessariamente representam o que devem fazer
-				System.out.print("Alteração de dados, digite o ID da pessoa: ");
-//					ID = leitor.nextInt();
-//					AlterarPessoa(ID);
-				break;
+			case 6:
 			case 7:
-				System.out.print("\t\tRELATÓRIO POPULACIONAL\n");
-//					RelatorioGeral(ID);
+				Indicador indicadores = manipulador.geraIndicadores();
+				float populacaoTotal = indicadores.getPopulacaoTotal();
+				float populacaoF = indicadores.getPopulacaoF();
+				float populacaoM = indicadores.getPopulacaoM();
+				float ate12 = indicadores.getAte12();
+				float de13a19 = indicadores.getDe13a19();
+				float de20a25 = indicadores.getDe20a25();
+				float de26a30 = indicadores.getDe26a30();
+				float de31a45 = indicadores.getDe31a45();
+				float de46a65 = indicadores.getDe46a65();
+				float mais65 = indicadores.getMais65();
+				float rural = indicadores.getRural();
+				float urbana = indicadores.getUrbana();
+				float solteiro = indicadores.getSolteiro();
+				float casado = indicadores.getCasado();
+				float divorciado = indicadores.getDivorciado();
+				float viuvo = indicadores.getViuvo();
+				float parda = indicadores.getParda();
+				float preta = indicadores.getPreta();
+				float branca = indicadores.getBranca();
+				float amarela = indicadores.getAmarela();
+				float indigena = indicadores.getIndigena();
+				if(op == 6) {
+				System.out.println("\n********** RELATÓRIO DE CATEGORIZAÇÃO **********");
+				System.out.printf("População total: %.0f\n", populacaoTotal);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				System.out.printf("\nCaracterização\nSexo\nFeminino: %.0f (%.2f%%)\n", populacaoF, populacaoF/populacaoTotal*100);
+				System.out.printf("Masculino: %.0f (%.2f%%)\n", populacaoM, populacaoM/populacaoTotal*100);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				System.out.printf("\nIdade\n0 a 12 anos: %.0f (%.2f%%)\n", ate12, ate12/populacaoTotal*100);
+				System.out.printf("13 a 19 anos: %.0f (%.2f%%)\n", de13a19, de13a19/populacaoTotal*100);
+				System.out.printf("20 a 25 anos: %.0f (%.2f%%)\n", de20a25, de20a25/populacaoTotal*100);
+				System.out.printf("26 a 30 anos: %.0f (%.2f%%)\n", de26a30, de26a30/populacaoTotal*100);
+				System.out.printf("31 a 45 anos: %.0f (%.2f%%)\n", de31a45, de31a45/populacaoTotal*100);
+				System.out.printf("46 a 65 anos: %.0f (%.2f%%)\n", de46a65, de46a65/populacaoTotal*100);
+				System.out.printf("Mais de 65 anos: %.0f (%.2f%%)\n", mais65, mais65/populacaoTotal*100);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				System.out.printf("\nMoradia\nRural: %.0f (%.2f%%)\n", rural, rural/populacaoTotal*100);
+				System.out.printf("Urbana: %.0f (%.2f%%)\n", urbana, urbana/populacaoTotal*100);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				System.out.printf("\nEstado Civil\nSolteiro(a): %.0f (%.2f%%)\n", solteiro, solteiro/populacaoTotal*100);
+				System.out.printf("Casado(a): %.0f (%.2f%%)\n", casado, casado/populacaoTotal*100);
+				System.out.printf("Divorciado(a): %.0f (%.2f%%)\n", divorciado, divorciado/populacaoTotal*100);
+				System.out.printf("Viúvo(a): %.0f (%.2f%%)\n", viuvo, viuvo/populacaoTotal*100);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				System.out.printf("\nRaça\nParda: %.0f (%.2f%%)\n", parda, parda/populacaoTotal*100);
+				System.out.printf("Preta: %.0f (%.2f%%)\n", preta, preta/populacaoTotal*100);
+				System.out.printf("Branca: %.0f (%.2f%%)\n", branca, branca/populacaoTotal*100);
+				System.out.printf("Amarela: %.0f (%.2f%%)\n", amarela, amarela/populacaoTotal*100);
+				System.out.printf("Indígena: %.0f (%.2f%%)\n", indigena, indigena/populacaoTotal*100);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				}
+				else {
+					float totalIdadeF = indicadores.getTotalIdadeF();
+					float totalIdadeM = indicadores.getTotalIdadeM();
+					float mediaF = indicadores.getMediaF();
+					float mediaM = indicadores.getMediaM();
+					float mediaRural = indicadores.getMediaRural();
+					float mediaUrbana = indicadores.getMediaUrbana();
+					float mediaSolteiro = indicadores.getMediaSolteiro();
+					float mediaCasado = indicadores.getMediaCasado();
+					float desvioPadraoSolteiro = indicadores.getDesvioPadraoSolteiro();
+					float desvioPadraoCasado = indicadores.getDesvioPadraoCasado();
+				System.out.println("\n********** RELATÓRIO ESTATISTICO **********");
+				System.out.printf("Média de idade geral: %.1f anos\n", (totalIdadeF+totalIdadeM)/populacaoTotal);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				System.out.printf("\nCategorizada por sexo\nFeminino:\t%.1f anos\nMasculino:\t%.1f anos\n", 
+						mediaF, mediaM);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				System.out.printf("\nCategorizada por moradia\nRural:\t\t%.1f anos\nUrbana:\t\t%.1f anos\n", 
+						mediaRural, mediaUrbana);
+				System.out.printf("____________________________________________________________________________________________________\n");
+				System.out.printf("\nSolteiros e casados\n\t\tMédia de idade\tDesvio padrão\nSolteiros:\t%.1f anos\t%.1f anos\n"
+						+ "Casados:\t%.1f anos\t%.1f anos\n", mediaSolteiro, desvioPadraoSolteiro, mediaCasado, desvioPadraoCasado);
+				System.out.printf("____________________________________________________________________________________________________\n");
+
+				}
 				break;
 			case 8:
-				System.out.print("\t\tRELATÓRIO ESTATÍSTICO\n");
-				RelatorioEstatistico();
-				break;
-			case 9:
-				System.out.print("\t\t\n\nObrigado pela atenção !\n\n");
+				System.out.println("\n\n\t\tATÉ A PRÓXIMA!!!\n\n");
 				break;
 			default:
-				System.out.print("\t\t*** Opção digitada está incorreta! ***\n\n: ");
 				break;
 			}
-		} while (op != 7);
-	}
-
-	private static void RelatorioEstatistico() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void RelatorioGeral(int iD) {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void AdicionarPessoa(int iD) {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void AlterarPessoa(int iD) {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void RemoverPessoa(int iD) {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static String PesquisarPessoa(int iD) {
-		// TODO Auto-generated method stub
-		return null;
+		} while (op != 8);
 	}
 }

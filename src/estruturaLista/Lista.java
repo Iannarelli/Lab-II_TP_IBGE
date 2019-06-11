@@ -80,6 +80,29 @@ public class Lista {
 		return aux.toString();
 	}
  
+	public float[] populacao() {
+		CelulaPessoa aux = primeiro.proximo;
+		float[] cont = new float[2];
+		cont[0] = 0;
+		cont[1] = 0;
+		while (aux != null) {
+			cont[0]++;
+			cont[1] += aux.item.getIdade();
+			aux = aux.proximo;
+		} 
+		return cont;
+	}
+
+	public float variancia(float media) {
+		CelulaPessoa aux = primeiro.proximo;
+		float variancia = 0;
+		while (aux != null) {
+			variancia += Math.pow((aux.item.getIdade() - media),2);
+			aux = aux.proximo;
+		}
+		return variancia;
+	}
+
 	public void imprimir() { 
 		 
 		 

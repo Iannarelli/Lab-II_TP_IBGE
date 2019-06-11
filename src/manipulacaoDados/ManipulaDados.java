@@ -1,5 +1,6 @@
 package manipulacaoDados;
 
+import classes.Indicador;
 import classes.Pessoa;
 import estruturaArvore.Arvore;
 import estruturaLista.EstruturaLista;
@@ -148,5 +149,13 @@ public class ManipulaDados {
 		populaArvore(pessoaNova);
 		armazenaDadosArquivo();
 		System.out.println(pessoaNova.toString()); //verificar se precisa ou se colocou só para teste
+	}
+	
+	public float populacaoTotal() {
+		return estruturaLista.getLista("masculino").populacao()[0] + estruturaLista.getLista("feminino").populacao()[0];
+	}
+	
+	public Indicador geraIndicadores() {
+		return new Indicador(this);
 	}
 }
