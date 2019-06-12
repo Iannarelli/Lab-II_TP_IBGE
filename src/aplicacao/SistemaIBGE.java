@@ -16,6 +16,7 @@ public class SistemaIBGE {
 		boolean mostraMenu = true;
 		String[] categorias = new String[5];
 		String[] dados = new String[7];
+		@SuppressWarnings("unused")
 		String lixo;
 		Pessoa pessoa;
 		Scanner leitor = new Scanner(System.in);
@@ -23,7 +24,7 @@ public class SistemaIBGE {
 		ArquivoTextoEscrita escritorArquivo = new ArquivoTextoEscrita();
 		System.out.println("Bem vindo ao Sistema CENSO 2020 do IBGE!\n");
 		System.out.println("Para começar, informe o nome do arquivo da base de dados: ");
-		String arquivo = leitor.next();
+		String arquivo = leitor.nextLine();
 		ManipulaDados manipulador = new ManipulaDados(leitorArquivo, escritorArquivo, arquivo);
 		leitorArquivo.abrirArquivo(arquivo);
 		manipulador.carregaDadosArquivo();
@@ -138,7 +139,7 @@ public class SistemaIBGE {
 								&& !dados[6].equalsIgnoreCase("indígena") && !dados[6].equalsIgnoreCase("indígeno"));
 						manipulador.pessoaNova(dados);
 					} else {
-						System.out.println("A identidade " + identidade + " já está dadastrada."); /*************AQUI***************/
+						System.out.println("A identidade " + dados[0] + " já está cadastrada."); /*************AQUI***************/
 						mostraMenu = true;
 					}
 				}
@@ -400,5 +401,6 @@ public class SistemaIBGE {
 				break;
 			}
 		} while (op != 8);
+	leitor.close();
 	}
 }

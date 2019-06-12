@@ -36,7 +36,6 @@ public class ArquivoTextoEscrita {
 	
 		try {
 			saida.write(textoEntrada);
-			saida.newLine();
 		}
 		catch (IOException excecao){
 			System.out.println("Erro de entrada/saída " + excecao);

@@ -65,7 +65,7 @@ public class ManipulaDados {
 		String[] informacoes = new String[7];
 		Pessoa pessoa;
 		String linhaArquivo = leitorArquivo.ler();
-		while (linhaArquivo != null) {
+		while (linhaArquivo != null && linhaArquivo.length() != 0) {
 			informacoes = linhaArquivo.split(";");
 			pessoa = new Pessoa(Long.parseLong(informacoes[0]), informacoes[1], informacoes[2].charAt(0),
 					Integer.parseInt(informacoes[3]), informacoes[4], informacoes[5], informacoes[6]);
@@ -77,7 +77,7 @@ public class ManipulaDados {
 	
 	public void armazenaDadosArquivo() {
 		StringBuilder aux = new StringBuilder(estruturaLista.getLista("masculino").listaCompleta());
-		aux.append(estruturaLista.getLista("feminino").listaCompleta());
+		aux.append("\n" + estruturaLista.getLista("feminino").listaCompleta());
 		escritorArquivo.abrirArquivo(arquivo);
 		escritorArquivo.escrever(aux.toString());
 		escritorArquivo.fecharArquivo();

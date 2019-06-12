@@ -74,8 +74,11 @@ public class Lista {
 			pessoa = celulaAux.item;
 			aux.append(String.valueOf(pessoa.getIdentidade()) + ";" + pessoa.getNome() + ";" + String.valueOf(pessoa.getSexo())
 					+ ";" + String.valueOf(pessoa.getIdade()) + ";" + pessoa.getMoradia() + ";" + pessoa.getEstadoCivil() + ";"
-					+ pessoa.getRaca() + "\n");
+					+ pessoa.getRaca());
 			celulaAux = celulaAux.proximo;
+			if(celulaAux != null) {
+				aux.append("\n");
+			}
 		}
 		return aux.toString();
 	}

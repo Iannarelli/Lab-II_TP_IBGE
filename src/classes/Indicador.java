@@ -5,6 +5,7 @@ import manipulacaoDados.ManipulaDados;
 
 public class Indicador {
 
+	@SuppressWarnings("unused")
 	private ManipulaDados manipulador;
 	private float populacaoTotal;
 	private float populacaoF;
